@@ -556,23 +556,23 @@ export default function App() {
       </div>
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
-      <header className="relative border-b border-white/[0.06] px-8 py-5 flex items-center justify-between bg-white/[0.01] backdrop-blur-sm">
-        <div className="flex items-center gap-4">
+      <header className="relative border-b border-white/[0.06] px-4 sm:px-8 py-4 sm:py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 bg-white/[0.01] backdrop-blur-sm">
+        <div className="flex items-center gap-3 sm:gap-4">
           <img
             src="/ChemXAI.png.png"
             alt="ChemXAI Logo"
-            className="h-10 w-auto object-contain"
+            className="h-8 sm:h-10 w-auto object-contain"
           />
           <div>
-            <h1 className="text-2xl font-black tracking-[0.08em] text-white leading-none">
+            <h1 className="text-xl sm:text-2xl font-black tracking-[0.08em] text-white leading-none">
               FLARECATCH
             </h1>
-            <p className="text-[12px] text-slate-400 mt-1.5 tracking-[0.02em] font-light">
+            <p className="text-[11px] sm:text-[12px] text-slate-400 mt-1 sm:mt-1.5 tracking-[0.02em] font-light">
               AI-Optimized Reactor Control for Micro-Scale Gas-to-Methanol Conversion
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3 self-end sm:self-auto">
           <div
             className="w-2.5 h-2.5 rounded-full animate-pulse-glow"
             style={{
@@ -580,19 +580,16 @@ export default function App() {
               transition: "background-color 0.5s ease",
             }}
           />
-          <span className="text-[11px] tracking-[0.14em] font-semibold text-slate-300 uppercase">
+          <span className="text-[10px] sm:text-[11px] tracking-[0.14em] font-semibold text-slate-300 uppercase">
             {isSimulating ? "Live Simulation" : aiMode ? "AI Active" : "Fixed Mode"}
           </span>
         </div>
       </header>
 
-      {/* ── Three-column body ───────────────────────────────────────────────── */}
-      <main
-        className="relative grid grid-cols-[29%_36%_35%]"
-        style={{ minHeight: "calc(100vh - 72px - 134px)" }}
-      >
+      {/* ── Three-column responsive body ────────────────────────────────────── */}
+      <main className="relative grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-72px-134px)]">
         {/* ── Left: Live Feed & Controls ───────────────────────────────────── */}
-        <div className="border-r border-white/[0.06] p-6 flex flex-col gap-5">
+        <div className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-white/[0.06] p-4 sm:p-6 flex flex-col gap-5">
           {/* Live gas conditions */}
           <Card title="Live Gas Feed">
             <div className="flex flex-col gap-6">
@@ -693,7 +690,7 @@ export default function App() {
         </div>
 
         {/* ── Center: Model Output Panel ───────────────────────────────────── */}
-        <div className="border-r border-white/[0.06] p-6 flex flex-col gap-5">
+        <div className="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-white/[0.06] p-4 sm:p-6 flex flex-col gap-5">
           <Card title={aiMode ? "AI Recommended Settings" : "Fixed-Setting Output"}>
             <div className="grid grid-cols-2 gap-3">
               <StatBlock label="Reformer Temp (°C)" value={displayed.reformerTemp} />
@@ -782,7 +779,7 @@ export default function App() {
                 { label: "Heat Recovery Eff.", value: 82, color: "from-amber-500 to-amber-400" },
               ].map(({ label, value, color }) => (
                 <div key={label} className="flex items-center gap-4">
-                  <span className="text-[10px] text-slate-500 uppercase tracking-widest w-36 shrink-0">
+                  <span className="text-[10px] text-slate-500 uppercase tracking-widest w-28 sm:w-36 shrink-0">
                     {label}
                   </span>
                   <div className="flex-1 h-1.5 rounded-full bg-white/[0.05] overflow-hidden">
@@ -801,7 +798,7 @@ export default function App() {
         </div>
 
         {/* ── Right: Impact Dashboard ──────────────────────────────────────── */}
-        <div className="p-6 flex flex-col gap-5">
+        <div className="lg:col-span-5 p-4 sm:p-6 flex flex-col gap-5">
           <Card title="Live Impact" className="flex-1 flex flex-col">
             {/* Current-rate metrics — never accumulated */}
             <div className="flex flex-col gap-3 mb-6">
@@ -904,8 +901,8 @@ export default function App() {
       </main>
 
       {/* ── Process Flow Strip ──────────────────────────────────────────────── */}
-      <footer className="relative border-t border-white/[0.06] px-8 py-7 bg-white/[0.01]">
-        <div className="flex items-start justify-between max-w-4xl mx-auto">
+      <footer className="relative border-t border-white/[0.06] px-4 sm:px-8 py-5 sm:py-7 bg-white/[0.01]">
+        <div className="flex flex-wrap md:flex-nowrap items-start justify-center md:justify-between gap-6 md:gap-2 max-w-4xl mx-auto">
           {[
             { icon: <IconFlame />, label: "Flare Gas In", sub: "Raw feedstock capture" },
             { icon: <IconReformer />, label: "Reforming", sub: "Steam methane reforming" },
@@ -914,20 +911,20 @@ export default function App() {
             { icon: <IconAI />, label: "AI Optimization", sub: "ML-driven control" },
           ].map((step, i) => (
             <div key={step.label} className="flex items-center">
-              <div className="flex flex-col items-center gap-2.5 w-28 text-center">
-                <div className="w-11 h-11 rounded-full bg-white/[0.04] border border-white/[0.1] flex items-center justify-center text-blue-400 transition-all duration-300 hover:bg-white/[0.08] hover:border-blue-400/30 hover:text-blue-300">
+              <div className="flex flex-col items-center gap-2.5 w-24 sm:w-28 text-center">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/[0.04] border border-white/[0.1] flex items-center justify-center text-blue-400 transition-all duration-300 hover:bg-white/[0.08] hover:border-blue-400/30 hover:text-blue-300">
                   {step.icon}
                 </div>
                 <div>
-                  <p className="text-[10px] font-semibold text-slate-300 tracking-[0.06em] uppercase leading-tight">
+                  <p className="text-[9px] sm:text-[10px] font-semibold text-slate-300 tracking-[0.06em] uppercase leading-tight">
                     {step.label}
                   </p>
-                  <p className="text-[9px] text-slate-600 mt-0.5">{step.sub}</p>
+                  <p className="text-[8px] sm:text-[9px] text-slate-600 mt-0.5">{step.sub}</p>
                 </div>
               </div>
               {i < 4 && (
-                <div className="flex items-center mx-1.5 -mt-8">
-                  <div className="w-8 h-px bg-gradient-to-r from-white/[0.1] to-white/[0.04]" />
+                <div className="hidden md:flex items-center mx-1 sm:mx-1.5 -mt-8">
+                  <div className="w-6 sm:w-8 h-px bg-gradient-to-r from-white/[0.1] to-white/[0.04]" />
                   <svg viewBox="0 0 8 8" className="w-2 h-2 text-blue-500/40 -ml-0.5" fill="currentColor">
                     <path d="M0 0 L8 4 L0 8 Z" />
                   </svg>
